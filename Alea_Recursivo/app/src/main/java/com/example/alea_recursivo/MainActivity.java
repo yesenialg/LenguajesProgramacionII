@@ -31,9 +31,8 @@ public class MainActivity extends AppCompatActivity {
                 jugador.setIntentos(1);
                 revisar555();
                 sumaCifras();
-                //capicua();
+                //escapicua();
                 mostrarPuntosIntentos();
-                terminarJuego();
             }
         });
     }
@@ -94,24 +93,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void capicua() {
+    private void escapicua() {
 
     }
 
-    private boolean esCapicua(){
-        return false;
+    private int Capicua(){
+        return 0;
     }
 
     private void mostrarPuntosIntentos() {
-        btnPuntos.setText(jugador.getPuntos());
-        btnIntentos.setText(jugador.getIntentos());
-    }
-
-    private void terminarJuego() {
-        if(jugador.getPuntos() == 20){
-            btnGenerar.isEnabled();
+        if(Integer.parseInt(jugador.getPuntos()) < 20) {
+            btnPuntos.setText(jugador.getPuntos());
+            btnIntentos.setText(jugador.getIntentos());
+        }else{
+            btnPuntos.setText(jugador.getPuntos());
+            btnIntentos.setText(jugador.getIntentos());
             btnGenerar.setText("JUEGO TERMINADO");
+            btnGenerar.setEnabled(false);
         }
     }
+
 
 }
