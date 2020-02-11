@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 aleatorios();
                 mostrar();
-                jugador.sumarIntentos();
+                jugador.setIntentos(1);
                 revisar555();
                 sumaCifras();
                 //capicua();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 contador++;
             }
         }
-        jugador.sumarPuntos(contador);
+        jugador.setPuntos(contador);
     }
 
     private void sumaCifras() {
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 puntosSuma += 3;
             }
         }
-        jugador.sumarPuntos(puntosSuma);
+        jugador.setPuntos(puntosSuma);
     }
 
     private int sumaRecursiva(int num){
@@ -95,11 +95,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void capicua() {
+
+    }
+
+    private boolean esCapicua(){
+        return false;
     }
 
     private void mostrarPuntosIntentos() {
-        btnPuntos.setText("2");
-//        btnIntentos.setText(jugador.getIntentos());
+        btnPuntos.setText(jugador.getPuntos());
+        btnIntentos.setText(jugador.getIntentos());
     }
 
     private void terminarJuego() {

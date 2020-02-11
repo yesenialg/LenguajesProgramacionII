@@ -14,23 +14,23 @@ public class Jugador {
         return intentos;
     }
 
-    public void setIntentos(int inte) {
-        intentos = inte;
+    public void setIntentos(int intentos) {
+        this.intentos += intentos;
     }
 
     public int getPuntos() {
         return puntos;
     }
 
-    public void setPuntos(int punt) {
-        this.puntos = punt;
+    public void setPuntos(int puntos) {
+        this.puntos += puntos;
     }
 
     public void sumarPuntos(int cantidad){
-        puntos += cantidad;
+        this.puntos += cantidad;
     }
 
     public void sumarIntentos(){
-        intentos++;
+        this.intentos++;
     }
 }
