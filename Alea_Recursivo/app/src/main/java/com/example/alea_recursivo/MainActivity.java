@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 jugador.setIntentos(1);
                 revisar555();
                 sumaCifras();
-                //escapicua();
+                escapicua();
                 mostrarPuntosIntentos();
             }
         });
@@ -94,11 +94,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void escapicua() {
+        int puntosCapicua = 0;
+        for(int i = 0; i < 5; i++){
+            boolean EsCapi = Capicua(numeros[i]);
+            if(EsCapi){
+                puntosCapicua += 5;
+            }
+        }
+        jugador.setPuntos(puntosCapicua);
 
     }
 
-    private int Capicua(){
-        return 0;
+    private boolean Capicua(int num){
+        int reves = 0;
+        int r;
+        int aux = num;
+        int numero = num;
+        boolean esCapi;
+        while (numero > 0){
+            r = numero % 10;
+            reves = reves * 10 + r;
+            numero = numero/10;
+        }
+        if(reves == aux){
+            esCapi = true;
+        }else{
+            esCapi = false;
+        }
+        return esCapi;
     }
 
     private void mostrarPuntosIntentos() {
