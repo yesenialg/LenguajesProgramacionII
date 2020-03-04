@@ -18,16 +18,14 @@ public class MainActivity extends AppCompatActivity {
             btnC2, btnC3, btnC4, btnC5, btnD1, btnD2, btnD3, btnD4, btnD5, btnE1, btnE2,
             btnE3, btnE4, btnE5, btnIndJugador1, btnIndJugador2;
     int turno, pregunta, puntaje1, puntaje2, correcto;
-    Button  pres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Conectar();
-        pregunta = getIntent().getIntExtra("pregunta");
-        turno = getIntent().getIntExtra("turno");
-        correcto = getIntent().getIntExtra("correcto");
+        Bundle recup = getIntent().getExtras();
+        int puntaje = recup.getInt("correcto");
 
         if(turno % 2 != 0){
             btnIndJugador1.setBackgroundColor(Color.parseColor("#CDDC39"));

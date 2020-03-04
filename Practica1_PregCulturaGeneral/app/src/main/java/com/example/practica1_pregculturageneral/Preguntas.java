@@ -25,7 +25,8 @@ public class Preguntas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
         Conectar();
-        final int pregunta = getIntent().getIntExtra("pregunta");
+        Bundle recup = getIntent().getExtras();
+        int pregunta = recup.getInt("pregunta");
         Archivo = new ArchivoPlano(getApplicationContext());
         llenarLista();
         Cargar();
@@ -33,10 +34,8 @@ public class Preguntas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int correcto = verificar();
-                int preg = pregunta + 1;
                 Intent I = new Intent (getApplicationContext(), MainActivity.class);
-                I.putExtra("pregunta", preg);
-                I.putExtra("correto", correcto);
+                I.putExtra("correcto", correcto);
                 startActivity(I);
             }
         });
