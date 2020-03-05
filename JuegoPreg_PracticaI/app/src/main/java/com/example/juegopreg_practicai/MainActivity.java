@@ -283,8 +283,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 turnColor();
-                habilitar();
                 limpiarCampos();
+                habilitar();
                 revGanar();
                 turno++;
                 preg--;
@@ -497,9 +497,7 @@ public class MainActivity extends AppCompatActivity {
         btnEnviar.setEnabled(false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void habilitar() {
-
+    private ArrayList<Button> llenar(){
         ArrayList<Button> butt = new ArrayList<>();
 
         butt.add(btnA1);
@@ -527,10 +525,32 @@ public class MainActivity extends AppCompatActivity {
         butt.add(btnE3);
         butt.add(btnE4);
         butt.add(btnE5);
+        return butt;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void habilitar() {
+        ArrayList<Button> butt = llenar();
+        int cantidad = 0;
+
         for (int i = 0; i<25; i++){
-            if(butt.get(i).getBackground() != getDrawable(R.drawable.verde) || butt.get(i).getBackground()!=getDrawable(R.drawable.yellow)){
+
+            if((butt.get(i).getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.verde).getConstantState())) ||
+                    (butt.get(i).getBackground().getConstantState().equals(getResources().getDrawable(R.drawable.yellow).getConstantState()))){
+                butt.get(i).setEnabled(false);
+
+            }else{
                 butt.get(i).setEnabled(true);
+                cantidad++;
             }
+        }
+
+        if(preg == 0 || cantidad == 0){
+            deshabilitar();
+            limpiarCampos();
+            btnIndJugador1.setEnabled(false);
+            btnIndJugador2.setEnabled(false);
+            tvPregunta.setText("LAS PREGUNTAS Y/O CASILLAS SE HAN TERMINADO");
         }
     }
 
