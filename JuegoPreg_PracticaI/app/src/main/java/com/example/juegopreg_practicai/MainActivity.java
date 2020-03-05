@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Conectar();
         Archivo = new ArchivoPlano(getApplicationContext());
         llenarLista();
+        limpiarCampos();
         btnIndJugador2.setEnabled(false);
 
         btnA1.setOnClickListener(new View.OnClickListener() {
@@ -548,9 +549,20 @@ public class MainActivity extends AppCompatActivity {
         if(preg == 0 || cantidad == 0){
             deshabilitar();
             limpiarCampos();
-            btnIndJugador1.setEnabled(false);
-            btnIndJugador2.setEnabled(false);
-            tvPregunta.setText("LAS PREGUNTAS Y/O CASILLAS SE HAN TERMINADO");
+            btnIndJugador1.setEnabled(true);
+            btnIndJugador2.setEnabled(true);
+            btnIndJugador1.setText("Jugador 1: " + puntaje1);
+            btnIndJugador2.setText("Jugador 2: " + puntaje2);
+            Toast.makeText(getApplicationContext(), "JUEGO TERMINADO: NO HAY MAS PREGUNTAS Y/O CASILLAS", Toast.LENGTH_LONG).show();
+
+            if(puntaje1 > puntaje2){
+                tvPregunta.setText("EL GANADOR ES EL JUGADOR 1");
+            }else if (puntaje1 < puntaje2){
+                tvPregunta.setText("EL GANADOR ES EL JUGADOR 2");
+            }else{
+                tvPregunta.setText("EMPATE");
+            }
+
         }
     }
 
