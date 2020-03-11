@@ -36,6 +36,7 @@
         android:fontFamily="@font/audiowide"
         android:hint="Contrasena"
         android:textSize="20dp"
+        android:inputType="textPassword"
         android:layout_below="@+id/tvUsuario"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="30dp"

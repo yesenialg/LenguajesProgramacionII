@@ -1,54 +1,52 @@
 package com.example.parcial_cuantosabesdefutbol;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ArchivoPartidos {
+public class ArchivoLogin {
 
     Context context;
 
-    private static String filePartidos = "Partidos.txt";
+    private static String fileLogin = "Login.txt";
     FileInputStream fis;
     FileOutputStream fos;
 
-    public ArchivoPartidos ( Context ctx){
+    public ArchivoLogin(Context ctx) {
         this.context = ctx;
     }
 
     public void escribir(String text) throws IOException {
-            fos = context.openFileOutput(filePartidos, context.MODE_APPEND);
-            fos.write(text.getBytes());
-            fos.write('\n');
-            fos.close();
+        fos = context.openFileOutput(fileLogin, context.MODE_APPEND);
+        fos.write(text.getBytes());
+        fos.write('\n');
+        fos.close();
     }
 
-    public ArrayList<Partidos> leer() throws IOException {
-        ArrayList<Partidos> lista = new ArrayList<>();
+    public ArrayList<Usuarios> leer() throws IOException {
+        ArrayList<Usuarios> lista = new ArrayList<>();
         int i = 2, cont = 0;
-        String equi1 = "", equi2 = "", fecha = "", lectura = "";
+        String t = "", u = "", c = "", lectura = "";
         char caracter;
-        fis = context.openFileInput("Partidos.txt");
-        while (i>0){
+        fis = context.openFileInput("Login.txt");
+        while (i > 0) {
             i = fis.read();
-            caracter = (char)i;
+            caracter = (char) i;
             lectura += caracter;
-            if(i == '\n'){
+            if (i == '\n') {
                 switch (cont) {
                     case 0:
-                        equi1 = lectura;
+                        t = lectura.trim();
                         break;
                     case 1:
-                        equi2 = lectura;
+                        u = lectura.trim();
                         break;
                     case 2:
-                        fecha = lectura;
-                        Partidos p = new Partidos(equi1, equi2, fecha);
+                        c = lectura.trim();
+                        Usuarios p = new Usuarios(t, u, c);
                         lista.add(p);
                         cont = -1;
                         break;

@@ -47,7 +47,7 @@ public class Administrador extends AppCompatActivity {
             public void onClick(View v) {
                 fecha = dp.getDayOfMonth() + " / " + (dp.getMonth()+1) + " / " + dp.getYear();
                 if(lvEquipo1.getSelectedItem().toString() == lvEquipo2.getSelectedItem().toString()) {
-                    Toast.makeText(getApplicationContext(), "Elija equipos diferentes", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Seleccione equipos diferentes", Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(getApplicationContext(), "Los equipos: " + lvEquipo1.getSelectedItem().toString() + " - " + lvEquipo2.getSelectedItem().toString() + " Juegan el " + fecha, Toast.LENGTH_LONG).show();
                     equipo1 = lvEquipo1.getSelectedItem().toString();
