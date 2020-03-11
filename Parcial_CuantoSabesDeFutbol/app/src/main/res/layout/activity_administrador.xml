@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo"
+    android:layout_height="match_parent"
+    tools:context=".Administrador">
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnGanancias"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_action_name"
+        android:layout_marginLeft="300dp">
+    </Button>
+
+    <TextView
+        android:layout_width="350dp"
+        android:fontFamily="@font/audiowide"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:text="ADMINISTRAR"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_height="50dp">
+    </TextView>
+
+    <TextView
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:text="Ingrese el equipo 1"
+    android:fontFamily="@font/audiowide"
+    android:textColor="@android:color/black"
+    android:layout_marginLeft="30dp"
+    android:background="@android:color/white"
+    android:layout_marginTop="80dp"
+    android:textAlignment="center"
+    ></TextView>
+
+    <Spinner
+        android:layout_width="300dp"
+        android:id="@+id/lvEquipo1"
+        android:fontFamily="@font/audiowide"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp">
+    </Spinner>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Ingrese el equipo 2"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@android:color/black"
+        android:layout_below="@id/lvEquipo1"
+        android:layout_marginLeft="30dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        ></TextView>
+
+    <Spinner
+        android:layout_width="300dp"
+        android:id="@+id/lvEquipo2"
+        android:fontFamily="@font/audiowide"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        android:layout_below="@id/lvEquipo1"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp">
+    </Spinner>
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Elija la fecha del partido"
+        android:fontFamily="@font/audiowide"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@id/lvEquipo2"
+        android:background="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        ></TextView>
+
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@id/lvEquipo2"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@android:color/white"
+        android:minDate="System.currentTimeMillis()"
+        tools:targetApi="o_mr1"></DatePicker>
+
+    <Button
+        android:id="@+id/btnAgregarPartido"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
+        android:fontFamily="@font/audiowide"
+        android:layout_marginTop="600dp"
+        android:layout_marginLeft="100dp"
+        android:text="Agregar">
+    </Button>
+
+</RelativeLayout>
