@@ -89,7 +89,8 @@ public class LoginUsuario extends AppCompatActivity {
                     tvUsuario.getText().toString().equals(lista.get(i).getUsuario().trim()) &&
                     tvContrasena.getText().toString().equals(lista.get(i).getContrasena().trim())) {
                 existe = true;
-                Intent a = new Intent(getApplicationContext(), Administrador.class);
+                Intent a = new Intent(getApplicationContext(), Apostador.class);
+                a.putExtra("Usuario", tvUsuario.getText().toString());
                 startActivity(a);
             }else if(lista.get(i).tipo.equals("apostador") && tvUsuario.getText().toString().equals(lista.get(i).getUsuario().trim())){
                 Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_LONG).show();

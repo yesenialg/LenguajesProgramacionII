@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo"
+    android:layout_height="match_parent"
+    tools:context=".InformacionAdministrador">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="350dp"
+            android:fontFamily="@font/audiowide"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            android:text="INFORMACIÓN"
+            android:textColor="@android:color/holo_red_light"
+            android:layout_height="50dp">
+        </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Numero de apostadores registrados"
+                android:fontFamily="@font/audiowide"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="70dp"
+                android:id="@+id/ApostRegistrados"
+                android:fontFamily="@font/audiowide"
+                android:textSize="20dp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Numero de ganadores"
+                android:fontFamily="@font/audiowide"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="90dp"
+                android:fontFamily="@font/audiowide"
+                android:id="@+id/Ganadores"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Ganancia o perdida"
+                android:fontFamily="@font/audiowide"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="90dp"
+                android:fontFamily="@font/audiowide"
+                android:id="@+id/Ganancia"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="Apostado por fecha"
+                android:fontFamily="@font/audiowide"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:id="@+id/ApostadosFecha"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:textAlignment="center">
+            </TextView>
+
+    </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>

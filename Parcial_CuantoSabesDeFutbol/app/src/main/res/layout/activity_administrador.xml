@@ -10,7 +10,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/btnGanancias"
+        android:id="@+id/btnInformacion"
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_action_name"
         android:layout_marginLeft="300dp">

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.util.Calendar;
 public class Administrador extends AppCompatActivity {
 
     ArrayAdapter adapter;
-    Button btnAgregar;
+    Button btnAgregar, btnInformacion;
     Spinner lvEquipo1, lvEquipo2;
     DatePicker dp;
     String fecha;
@@ -40,12 +41,10 @@ public class Administrador extends AppCompatActivity {
         lvEquipo1.setAdapter(adapter);
         lvEquipo2.setAdapter(adapter);
 
-
-
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fecha = dp.getDayOfMonth() + " / " + (dp.getMonth()+1) + " / " + dp.getYear();
+                fecha = dp.getDayOfMonth() + "/" + (dp.getMonth()+1) + "/" + dp.getYear();
                 if(lvEquipo1.getSelectedItem().toString() == lvEquipo2.getSelectedItem().toString()) {
                     Toast.makeText(getApplicationContext(), "Seleccione equipos diferentes", Toast.LENGTH_LONG).show();
                 }else{
@@ -58,6 +57,14 @@ public class Administrador extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+            }
+        });
+
+        btnInformacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getApplicationContext(), InformacionAdministrador.class);
+                startActivity(a);
             }
         });
     }
@@ -74,5 +81,6 @@ public class Administrador extends AppCompatActivity {
         lvEquipo1 = findViewById(R.id.lvEquipo1);
         lvEquipo2 = findViewById(R.id.lvEquipo2);
         dp = findViewById(R.id.datePicker);
+        btnInformacion = findViewById(R.id.btnInformacion);
     }
 }

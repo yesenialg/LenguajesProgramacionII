@@ -12,8 +12,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class Apostador extends AppCompatActivity {
 
@@ -25,12 +30,15 @@ public class Apostador extends AppCompatActivity {
     ArchivoPartidos Archivo;
     ArrayList<String> part;
     String [] apuesta = {"50000", "10000", "200000", "300000", "400000", "500000"};
-    String ganador;
+    String ganador, Usuario, fechaPartido;
+    ArchivoApuestas arc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apostador);
+        Bundle recuperar = getIntent().getExtras();
+        Usuario = recuperar.getString("Usuario");
         conectar();
         leer();
         llenarPart();
@@ -61,21 +69,39 @@ public class Apostador extends AppCompatActivity {
                     spPartidos.setEnabled(true);
                     RbtnEquipo1.setEnabled(false);
                     RbtnEquipo2.setEnabled(false);
+                    escribir();
                     Toast.makeText(getApplicationContext(), "La apuesta es de: " + spCantApuesta.getSelectedItem().toString() + " con la victoria de " + ganador, Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
+    private void escribir() {
+        Calendar cal = new GregorianCalendar();
+        Date date = cal.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String formatteDate = df.format(date);
+
+        arc = new ArchivoApuestas(this);
+        String esc = Usuario + "\n" + RbtnEquipo1.getText().toString() + "\n" + RbtnEquipo2.getText().toString()
+                + "\n" + ganador + "\n" + fechaPartido + "\n" + formatteDate + "\n" + spCantApuesta.getSelectedItem().toString();
+        try {
+            arc.escribir(esc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void llenarRbtn() {
         int ind = spPartidos.getSelectedItemPosition();
         RbtnEquipo1.setText(lista.get(ind).equipo1.trim());
         RbtnEquipo2.setText(lista.get(ind).equipo2.trim());
+        fechaPartido = lista.get(ind).fechaPartido.trim();
     }
 
     private void llenarPart() {
         part = new ArrayList();
-        for (int i = 0; i < lista.size(); i++){
+        for (int i = 0; i < lista.size(); i++) {
             String p = lista.get(i).equipo1.trim() + " - " + lista.get(i).equipo2 + lista.get(i).fechaPartido;
             part.add(p);
         }
