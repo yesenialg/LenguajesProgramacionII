@@ -28,15 +28,21 @@ public class LoginAdmin extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //existe();
-                Intent a = new Intent(getApplicationContext(), Administrador.class);
-                startActivity(a);
+                if(tvUsuario.getText().toString().equals("") || tvContrasena.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Asegurese de llenar todos los campos", Toast.LENGTH_LONG).show();
+                }else {
+                    existe();
+                }
             }
         });
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                noExiste();
+                if(tvUsuario.getText().toString().equals("") || tvContrasena.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Asegurese de llenar todos los campos", Toast.LENGTH_LONG).show();
+                }else {
+                    noExiste();
+                }
             }
         });
     }
@@ -48,11 +54,15 @@ public class LoginAdmin extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        boolean existe = false;
         for (int i = 0; i < lista.size(); i++){
-            if(lista.get(i).tipo == "admin" && tvUsuario.getText().toString() == lista.get(i).usuario){
+            if(lista.get(i).getTipo().trim().equals("admin") && tvUsuario.getText().toString().equals(lista.get(i).getUsuario().trim())){
+                existe = true;
                 Toast.makeText(getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
-            }else{
+                break;
+            }
+        }
+            if(existe == false) {
                 Archivo = new ArchivoLogin(this);
                 String esc = "admin" + "\n" + tvUsuario.getText().toString() + "\n" + tvContrasena.getText().toString();
                 try {
@@ -61,9 +71,7 @@ public class LoginAdmin extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Toast.makeText(getApplicationContext(), "Usuario creado", Toast.LENGTH_LONG).show();
-
             }
-        }
     }
 
     private void existe() {
@@ -73,15 +81,20 @@ public class LoginAdmin extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        boolean existe = false;
         for (int i = 0; i < lista.size(); i++){
-            if(lista.get(i).tipo == "admin" && tvUsuario.getText().toString() == lista.get(i).usuario && tvContrasena.getText().toString() == lista.get(i).contrasena){
+
+            if(lista.get(i).tipo.equals("admin") && tvUsuario.getText().toString().equals(lista.get(i).getUsuario().trim()) && tvContrasena.getText().toString().equals(lista.get(i).getContrasena().trim())) {
+                existe = true;
                 Intent a = new Intent(getApplicationContext(), Administrador.class);
                 startActivity(a);
-            }else{
-                Toast.makeText(getApplicationContext(), "usuario o contraseña incorrecta", Toast.LENGTH_LONG).show();
-
+            }else if(lista.get(i).tipo.equals("admin") && tvUsuario.getText().toString().equals(lista.get(i).getUsuario().trim())){
+                Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_LONG).show();
+                existe = true;
             }
+        }
+        if(existe == false){
+            Toast.makeText(getApplicationContext(), "El usuario no existe", Toast.LENGTH_LONG).show();
         }
     }
 

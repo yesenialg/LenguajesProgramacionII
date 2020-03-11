@@ -58,7 +58,7 @@
         android:layout_below="@id/lvEquipo1"
         android:layout_marginLeft="30dp"
         android:background="@android:color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textAlignment="center"
         ></TextView>
 
@@ -69,7 +69,7 @@
         android:layout_height="50dp"
         android:background="@android:color/white"
         android:layout_below="@id/lvEquipo1"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="30dp">
     </Spinner>
 
