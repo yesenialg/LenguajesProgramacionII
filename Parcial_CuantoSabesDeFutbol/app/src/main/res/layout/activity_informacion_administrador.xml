@@ -100,6 +100,38 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
+                android:text="Seleccione una fecha"
+                android:fontFamily="@font/audiowide"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="30dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                ></TextView>
+
+            <Spinner
+                android:layout_width="300dp"
+                android:id="@+id/spFechas"
+                android:fontFamily="@font/audiowide"
+                android:layout_height="70dp"
+                android:background="@android:color/white"
+                android:layout_marginLeft="30dp">
+            </Spinner>
+
+            <Button
+                android:layout_width="280dp"
+                android:layout_height="50dp"
+                android:id="@+id/btnFecha"
+                android:textColor="@android:color/white"
+                android:background="@android:color/black"
+                android:fontFamily="@font/audiowide"
+                android:text="Revisar apuesta del dia"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                ></Button>
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
                 android:text="Apostado por fecha"
                 android:fontFamily="@font/audiowide"
                 android:textColor="@android:color/black"

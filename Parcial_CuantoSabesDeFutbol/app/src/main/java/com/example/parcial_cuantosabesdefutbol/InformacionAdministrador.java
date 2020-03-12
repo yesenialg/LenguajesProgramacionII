@@ -3,7 +3,12 @@ package com.example.parcial_cuantosabesdefutbol;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.provider.Telephony;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -12,38 +17,37 @@ import java.util.ArrayList;
 public class InformacionAdministrador extends AppCompatActivity {
 
     TextView tvNumeroApostadores, tvNumeroGanadores, tvGanancia, tvApostadoFecha;
+    Spinner fechas;
+    Button btnRevisarFecha;
 
+    SpinnerAdapter adapter;
     ArchivoApuestas ArchivoApuestas;
     ArrayList<Apuestas> listaApuestas;
     ArchivoLogin ArchivoLogin;
     ArrayList<Usuarios> listaLogin;
+    ArchivoPartidos ArchivoPartidos;
+    ArrayList<Partidos> listaPartidos;
+    ArrayList<String> part;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_administrador);
+        //listPart();
         conectar();
         llenar();
-        numapostadores();
-        apostadoPorFecha();
     }
 
-    private void apostadoPorFecha() {
-        String apuestas = "";
-        while (listaApuestas.size() > 0){
-            String fecha = listaApuestas.get(0).getFechaPartido();
-            int ApuestaFecha = 0;
-            for (int i = 0; i < listaApuestas.size(); i++){
-                int apuesta = 0;
-                if(listaApuestas.get(i).getFechaPartido().equals(fecha)){
-                    apuesta += Integer.parseInt(listaApuestas.get(i).getCantApuesta());
-                    listaApuestas.remove(i);
-                }
-                ApuestaFecha = apuesta;
-            }
-            apuestas += fecha + " = " + ApuestaFecha + "\n" ;
+    private void listPart() {
+         part = new ArrayList();
+        for (int i = 0; i < listaPartidos.size(); i++) {
+            String p = listaPartidos.get(i).fechaPartido;
+            part.add(p);
         }
-        tvApostadoFecha.setText(apuestas);
+    }
+
+    private void apostadoPorFecha(){
+
     }
 
     private void numapostadores() {
@@ -58,6 +62,10 @@ public class InformacionAdministrador extends AppCompatActivity {
 
     private void llenar() {
         leer();
+        //adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_expandable_list_item_1,part);
+        //fechas.setAdapter(adapter);
+        numapostadores();
+        //apostadoPorFecha();
     }
 
     private void leer() {
@@ -73,6 +81,12 @@ public class InformacionAdministrador extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /*try {
+            ArchivoPartidos = new ArchivoPartidos(this);
+            listaPartidos = ArchivoPartidos.leer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     private void conectar() {
@@ -80,5 +94,6 @@ public class InformacionAdministrador extends AppCompatActivity {
         tvNumeroGanadores = findViewById(R.id.Ganadores);
         tvGanancia = findViewById(R.id.Ganancia);
         tvApostadoFecha = findViewById(R.id.ApostadosFecha);
+        fechas = findViewById(R.id.spFechas);
     }
 }
