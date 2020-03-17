@@ -134,6 +134,7 @@
         android:layout_height="50dp"
         android:textColor="@android:color/white"
         android:background="@android:color/black"
+        android:enabled="false"
         android:fontFamily="@font/audiowide"
         android:layout_marginTop="600dp"
         android:layout_marginLeft="100dp"

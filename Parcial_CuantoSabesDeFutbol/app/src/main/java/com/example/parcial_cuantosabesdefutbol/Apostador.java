@@ -2,6 +2,7 @@ package com.example.parcial_cuantosabesdefutbol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -24,12 +25,14 @@ public class Apostador extends AppCompatActivity {
 
     Spinner spPartidos, spCantApuesta;
     RadioButton RbtnEquipo1, RbtnEquipo2;
-    Button btnApostar, btnGanador;
+    Button btnApostar, btnGanador, btnGanancias;
     ArrayAdapter adapter, adapt;
     ArrayList<Partidos> lista;
     ArchivoPartidos Archivo;
+    ArrayList<Apuestas> listaApuesta;
+    ArchivoApuestas ArchivoApuesta;
     ArrayList<String> part;
-    String [] apuesta = {"50000", "10000", "200000", "300000", "400000", "500000"};
+    String [] apuesta = {"50000", "100000", "200000", "300000", "400000", "500000"};
     String ganador, Usuario, fechaPartido;
     ArchivoApuestas arc;
 
@@ -52,28 +55,65 @@ public class Apostador extends AppCompatActivity {
                 spPartidos.setEnabled(false);
                 RbtnEquipo1.setEnabled(true);
                 RbtnEquipo2.setEnabled(true);
+                btnApostar.setEnabled(true);
+
                 llenarRbtn();
             }
         });
+
+        btnGanancias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent a = new Intent(getApplicationContext(), InformacionAposrtador.class);
+                a.putExtra("Usuario", Usuario);
+                startActivity(a);
+            }
+        });
+
         btnApostar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean apuesta = apuestaExistente();
                 if(!(RbtnEquipo1.isChecked() || RbtnEquipo2.isChecked())){
                     Toast.makeText(getApplicationContext(), "Seleccione un equipo como ganador", Toast.LENGTH_LONG).show();
-                }else{
-                    if(RbtnEquipo1.isChecked()){
-                        ganador = RbtnEquipo1.getText().toString();
-                    }else{
-                        ganador = RbtnEquipo2.getText().toString();
-                    }
+                }else if(apuesta == true) {
+                    Toast.makeText(getApplicationContext(), "No puedes apostar dos veces en un partido", Toast.LENGTH_LONG).show();
                     spPartidos.setEnabled(true);
                     RbtnEquipo1.setEnabled(false);
                     RbtnEquipo2.setEnabled(false);
+                    btnApostar.setEnabled(false);
+                }else{
+                        if(RbtnEquipo1.isChecked()){
+                            ganador = RbtnEquipo1.getText().toString();
+                        }else{
+                            ganador = RbtnEquipo2.getText().toString();
+                        }
+                        spPartidos.setEnabled(true);
+                        RbtnEquipo1.setEnabled(false);
+                        RbtnEquipo2.setEnabled(false);
+                        btnApostar.setEnabled(false);
                     escribir();
-                    Toast.makeText(getApplicationContext(), "La apuesta es de: " + spCantApuesta.getSelectedItem().toString() + " con la victoria de " + ganador, Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "La apuesta es de: " +
+                                spCantApuesta.getSelectedItem().toString() + " con la victoria de " +
+                                ganador, Toast.LENGTH_LONG).show();
+                    }
+                leer();
                 }
-            }
         });
+
+
+    }
+
+    private boolean apuestaExistente() {
+        boolean existe = false;
+        for (int i = 0; i < listaApuesta.size(); i++){
+            if(listaApuesta.get(i).getEquipo1().equals(RbtnEquipo1.getText().toString()) &&
+            listaApuesta.get(i).getEquipo2().equals(RbtnEquipo2.getText().toString()) &&
+            listaApuesta.get(i).getApostador().equals(Usuario)){
+                existe = true;
+            }
+        }
+        return existe;
     }
 
     private void escribir() {
@@ -114,6 +154,12 @@ public class Apostador extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            ArchivoApuesta = new ArchivoApuestas(this);
+            listaApuesta = ArchivoApuesta.leer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void conectar() {
@@ -123,5 +169,6 @@ public class Apostador extends AppCompatActivity {
         RbtnEquipo2 = findViewById(R.id.RbtnEquipo2);
         btnApostar = findViewById(R.id.btnApostar);
         btnGanador = findViewById(R.id.btnGanador);
+        btnGanancias = findViewById(R.id.btnGanancias);
     }
 }
