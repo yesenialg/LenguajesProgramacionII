@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo"
+    tools:context=".ConsultarActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Numero de recibidas"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvNumeroRecibidas">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Numero de unidades disponibles"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvNumeroDisponibles">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Numero de unidades arrendadas"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvNumeroArrendadas">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Mejor cliente"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvMejorCliente">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Valor promedio de arrendos"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvPromedioArrendos">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Vivienda más común"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/tvViviendaComun">
+        </TextView>
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_marginTop="20dp"
+            android:text="Seleccione un dia"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <DatePicker
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:id="@+id/dpFecha"
+            android:background="@android:color/white">
+        </DatePicker>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="BUSCAR"
+            android:layout_margin="10dp"
+            android:id="@+id/btnBuscar">
+        </Button>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:text="Arrendadas en el dia indicado"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </TextView>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/lvEnDia"
+            android:background="@android:drawable/screen_background_light_transparent">
+        </ListView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+        </TextView>
+
+    </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

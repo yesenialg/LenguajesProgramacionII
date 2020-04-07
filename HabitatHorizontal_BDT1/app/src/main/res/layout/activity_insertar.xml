@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".InsertarActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tipo"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <Spinner
+            android:id="@+id/spTipo"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_margin="10dp"
+            android:layout_height="70dp"
+            android:background="@android:color/white">
+        </Spinner>
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Precio"
+            android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_marginTop="10dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/etPrecio"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Direccion"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/etDireccion"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Propietario"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/etPropietario"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Telefono Propietario"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/etTelefono"
+            android:inputType="number"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+        </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Está arrendada"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp">
+        </TextView>
+
+        <Spinner
+            android:id="@+id/spArrendado"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_margin="10dp"
+            android:layout_height="70dp"
+            android:background="@android:color/white">
+        </Spinner>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="INSERTAR"
+            android:layout_margin="10dp"
+            android:id="@+id/btnInsert">
+        </Button>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

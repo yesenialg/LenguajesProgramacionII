@@ -1,7 +1,9 @@
 package com.example.parcial_cuantosabesdefutbol;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.view.View;
@@ -24,9 +26,8 @@ import java.util.GregorianCalendar;
 public class InformacionAdministrador extends AppCompatActivity {
 
     TextView tvValorAcumulado, tvGanancias, tvApostadoresPartido, tvValorPartido, tvGanadoresSemana;
-    Spinner spPartidos, spSemanas;
+    Spinner spPartidos;
     Button btnProv;
-    DatePicker dpCalendario;
 
     SpinnerAdapter adapter;
     ArchivoApuestas ArchivoApuestas;
@@ -38,8 +39,8 @@ public class InformacionAdministrador extends AppCompatActivity {
     ArchivoPartidos ArchivoPartidos;
     ArrayList<Partidos> listaPartidos;
     ArrayList<String> part;
-    ArrayList<String> semana;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,58 +50,70 @@ public class InformacionAdministrador extends AppCompatActivity {
         lists();
         llenar();
         acumApostado();
-        calcularGanancias();
+        ganadores();
 
         btnProv.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 numapostadores();
                 valorApostado();
-                ganadoresSemana();
+                leer();
             }
         });
     }
 
-    private void ganadoresSemana() {
+    //Revisa que apostadores han ganado
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void ganadores() {
+        String Ganadores3 = "\n" + "LOS GANADORES DE 3 APUESTAS SON: " + "\n";
+        String Ganadores4 = "\n" + "LOS GANADORES DE 4 APUESTAS SON: " + "\n";
+        String Ganadores5 = "\n" + "LOS GANADORES DE 5 APUESTAS SON: " + "\n";
+        int apuesta = 0;
+        int egresos = 0;
+        int ingresos = 0;
+        int ganancia;
+        for(int i = 0; i < listaLogin.size(); i++){
+            int cont = 0;
 
-    }
+            if(listaLogin.get(i).getTipo().equals("apostador")) {
+                String apost = listaLogin.get(i).getUsuario();
 
-    private void calcularGanancias() {
-        Calendar cal = new GregorianCalendar();
-        Date date = cal.getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String formatteDate = df.format(date);
-        int diaFor = dia(formatteDate);
-        int mesFor = mes(formatteDate);
+                for(int j = 0; j < listaApuestas.size(); j++){
 
-        int ingresos = 0, egresos = 0, ganancia;
-        for (int i = 0; i < listaApuestas.size(); i++){
-            String apuestaEq1 = listaApuestas.get(i).getEquipo1();
-            String apuestaEq2 = listaApuestas.get(i).getEquipo2();
-            String apuestaEqGan = listaApuestas.get(i).getEquipoGanador();
-            String apuestaFecha = listaApuestas.get(i).getFechaPartido();
+                    String equ1 = listaApuestas.get(j).getEquipo1();
+                    String eq2 = listaApuestas.get(j).getEquipo2();
+                    String eqGan = listaApuestas.get(j).getEquipoGanador();
+                    String fechaApues = listaApuestas.get(j).getFechaPartido();
 
-            for (int j = 0; j < listaMarcadores.size(); j++){
-                String marcadorEq1 = listaMarcadores.get(j).getEquipo1();
-                String marcadorEq2 = listaMarcadores.get(j).getEquipo2();
-                String marcadorEqGan = listaMarcadores.get(j).getEquipoGanador();
-                String marcadorFecha = listaMarcadores.get(j).getFecha();
 
-                int diaPart = dia(marcadorFecha);
-                int mesPart = mes(marcadorFecha);
+                    if(listaApuestas.get(j).getApostador().equals(apost)){
 
-                if(apuestaEq1.equals(marcadorEq1) && apuestaEq2.equals(marcadorEq2)
-                        && apuestaFecha.equals(marcadorFecha)
-                        && diaPart < diaFor && mesPart <= mesFor){
+                        for (int k = 0; k < listaMarcadores.size(); k++){
 
-                    if(apuestaEqGan.equals(marcadorEqGan)){
-                        egresos += Integer.parseInt(listaApuestas.get(i).getCantApuesta());
-                    }else{
-                        ingresos += Integer.parseInt(listaApuestas.get(i).getCantApuesta());
+                            if(equ1.equals(listaMarcadores.get(k).getEquipo1()) && eq2.equals(listaMarcadores.get(k).getEquipo2())
+                            && eqGan.equals(listaMarcadores.get(k).getEquipoGanador()) && listaMarcadores.get(k).getFecha().equals(fechaApues)){
+                                apuesta += Integer.parseInt(listaApuestas.get(j).getCantApuesta());
+                                cont++;
+                            }
+                        }
                     }
                 }
             }
+            if(cont > -1 && cont < 3){
+                ingresos += apuesta;
+            }else if(cont == 3){
+                Ganadores3 += listaLogin.get(i).getUsuario() + " Gana " + (apuesta*25) + "\n";
+                egresos += apuesta*25;
+            }else if (cont == 4){
+                Ganadores4 += listaLogin.get(i).getUsuario() + " Gana " + (apuesta*40) + "\n";
+                egresos += apuesta*40;
+            }else if(cont == 5){
+                Ganadores5 += listaLogin.get(i).getUsuario() + " Gana " + (apuesta*100) + "\n";
+                egresos += apuesta*100;
+            }
         }
+
         ganancia = ingresos - egresos;
 
         if(ganancia > 0){
@@ -109,20 +122,10 @@ public class InformacionAdministrador extends AppCompatActivity {
             tvGanancias.setText("\n" + "La perdida es de " + (ganancia*(-1)));
         }
 
+        tvGanadoresSemana.setText(Ganadores3 + Ganadores4 + Ganadores5);
     }
 
-    private int mes(String formatteDate) {
-        String a = formatteDate.charAt(3) + formatteDate.charAt(4) + "";
-        int mes = Integer.parseInt(a);
-        return mes;
-    }
-
-    private int dia(String formatteDate) {
-        String a = formatteDate.charAt(0) + formatteDate.charAt(1) + "";
-        int dia = Integer.parseInt(a);
-        return dia;
-    }
-
+    //calcula el valor apostado en todos los partidos
     private void acumApostado() {
         int cant = 0;
         for(int i = 0; i < listaApuestas.size(); i++){
@@ -131,6 +134,7 @@ public class InformacionAdministrador extends AppCompatActivity {
         tvValorAcumulado.setText("\n" + cant + "");
     }
 
+    //calcula el valor apostado por partido
     private void valorApostado() {
         int cant = 0;
         for(int i = 0; i < listaApuestas.size(); i++){
@@ -141,6 +145,7 @@ public class InformacionAdministrador extends AppCompatActivity {
         tvValorPartido.setText("\n" + cant + "");
     }
 
+    //crea la lista con la que se llena el Spinner
     private void lists() {
         part = new ArrayList();
         for (int i = 0; i < listaPartidos.size(); i++) {
@@ -161,6 +166,7 @@ public class InformacionAdministrador extends AppCompatActivity {
         }
     }
 
+    //revisa cuantos apostadores hay
     private void numapostadores() {
         int cant = 0;
         for(int i = 0; i < listaApuestas.size(); i++){
@@ -171,12 +177,14 @@ public class InformacionAdministrador extends AppCompatActivity {
         tvApostadoresPartido.setText("\n" + cant + "");
     }
 
+    //llena el Spinner
     private void llenar() {
         adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_expandable_list_item_1,part);
         spPartidos.setAdapter(adapter);
 
     }
 
+    //lee informacion de archivos planos
     private void leer() {
         try {
             ArchivoApuestas = new ArchivoApuestas(this);
@@ -202,8 +210,6 @@ public class InformacionAdministrador extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void conectar() {
@@ -214,6 +220,5 @@ public class InformacionAdministrador extends AppCompatActivity {
         tvGanadoresSemana = findViewById(R.id.tvGanadoresSemana);
         spPartidos = findViewById(R.id.spPartidos);
         btnProv = findViewById(R.id.btnProv);
-        dpCalendario = findViewById(R.id.dpCalendario);
     }
 }

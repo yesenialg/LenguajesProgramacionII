@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".InsertarActivity">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/etNombre"
+        android:hint="NOMBRE DEL CONTACTO"
+        android:layout_margin="10dp">
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/etTelefono"
+        android:hint="TELEFONO DEL CONTACTO"
+        android:layout_margin="10dp"
+        android:inputType="number">
+    </EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:id="@+id/btnInsertar"
+        android:text="AGREGAR CONTACTO">
+    </Button>
+
+</LinearLayout>

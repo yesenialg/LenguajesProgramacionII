@@ -48,6 +48,7 @@ public class LoginUsuario extends AppCompatActivity {
         });
     }
 
+    //crea el apostador si no existe
     private void noExiste() {
         try {
             Archivo = new ArchivoLogin(this);
@@ -75,6 +76,7 @@ public class LoginUsuario extends AppCompatActivity {
         }
     }
 
+    //si el apostador existe, lo dirige al activity apostador
     private void existe() {
         try {
             Archivo = new ArchivoLogin(this);

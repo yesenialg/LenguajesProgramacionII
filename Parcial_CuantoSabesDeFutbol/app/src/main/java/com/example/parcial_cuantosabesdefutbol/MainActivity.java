@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         conectar();
+
+        //Dirige al activity LoginAdmin
         admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Dirige al activity LoginUsuario
         usuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

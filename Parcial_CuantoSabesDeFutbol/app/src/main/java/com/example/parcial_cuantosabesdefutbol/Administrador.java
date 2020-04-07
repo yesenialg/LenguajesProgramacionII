@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Administrador extends AppCompatActivity {
 
@@ -31,8 +33,7 @@ public class Administrador extends AppCompatActivity {
 
     String [] equipos = {"America", "Nacional", "Medellin", "Junior", "Cali", "Millos", "Santafe", "Tolima", "Envigado", "Cucuta"};
     String equipo1, equipo2;
-    ArchivoPartidos arc, ArchivoPartidos;
-    ArrayList<Partidos> listaPartidos;
+    ArchivoPartidos arc;
 
 
     @Override
@@ -40,7 +41,6 @@ public class Administrador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_administrador);
         conectar();
-        lee();
         adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_expandable_list_item_1,equipos);
         lvEquipo1.setAdapter(adapter);
         lvEquipo2.setAdapter(adapter);
@@ -48,13 +48,19 @@ public class Administrador extends AppCompatActivity {
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar cal = new GregorianCalendar();
+                Date date = cal.getTime();
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                String formatteDate = df.format(date);
+                int dayForm = dia(formatteDate);
+                int montuForm = mes(formatteDate);
+
                 escribirFecha();
-                boolean existe = apuestaExistente();
                 if(lvEquipo1.getSelectedItem().toString() == lvEquipo2.getSelectedItem().toString()) {
                     Toast.makeText(getApplicationContext(), "Seleccione equipos diferentes", Toast.LENGTH_LONG).show();
-                }else if (existe == true) {
-                    Toast.makeText(getApplicationContext(), "No puede crear dos veces el mismo partido", Toast.LENGTH_LONG).show();
-                }else{
+                }else if(dayForm >= dp.getDayOfMonth() && montuForm > dp.getMonth() ) {
+                    Toast.makeText(getApplicationContext(), "Seleccione una fecha valida", Toast.LENGTH_LONG).show();
+                }else {
                         Toast.makeText(getApplicationContext(), "Los equipos: " + lvEquipo1.getSelectedItem().toString() + " - " + lvEquipo2.getSelectedItem().toString() + " Juegan el " + fecha, Toast.LENGTH_LONG).show();
                         equipo1 = lvEquipo1.getSelectedItem().toString();
                         equipo2 = lvEquipo2.getSelectedItem().toString();
@@ -63,11 +69,11 @@ public class Administrador extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }
                 }
-                lee();
-            }
         });
 
+        //Dirige al activity de informacionAdministrador
         btnInformacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,21 +83,21 @@ public class Administrador extends AppCompatActivity {
         });
     }
 
-    private boolean apuestaExistente() {
-        boolean existe = false;
-        for (int i = 0; i < listaPartidos.size(); i++){
-            if((lvEquipo1.getSelectedItem().toString().equals(listaPartidos.get(i).getEquipo1()) &&
-            lvEquipo2.getSelectedItem().toString().equals(listaPartidos.get(i).getEquipo2()) &&
-            fecha.equals(listaPartidos.get(i).getFechaPartido())) ||
-                    (lvEquipo1.getSelectedItem().toString().equals(listaPartidos.get(i).getEquipo2()) &&
-                    lvEquipo2.getSelectedItem().toString().equals(listaPartidos.get(i).getEquipo1()) &&
-                    fecha.equals(listaPartidos.get(i).getFechaPartido()))){
-                existe = true;
-            }
-        }
-        return existe;
+    //Extrae el mes del String fecha
+    private int mes(String formatteDate) {
+        String a = formatteDate.charAt(3) + "" + formatteDate.charAt(4) + "";
+        int mes = Integer.parseInt(a);
+        return mes;
     }
 
+    //Extrae el dia del String fecha
+    private int dia(String formatteDate) {
+        String a = formatteDate.charAt(0) + "" + formatteDate.charAt(1) + "";
+        int dia = Integer.parseInt(a);
+        return dia;
+    }
+
+    //Cambia los dias y meses con un solo digito, a dos "3" --> "03"
     private void escribirFecha() {
         String day, month;
         if(dp.getDayOfMonth() < 10){
@@ -107,15 +113,7 @@ public class Administrador extends AppCompatActivity {
         fecha = day + "/" + month + "/" + dp.getYear();
     }
 
-    private void lee() {
-        try {
-            ArchivoPartidos = new ArchivoPartidos(this);
-            listaPartidos = ArchivoPartidos.leer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+    //Manda los equipos y la fecha seleccionada a la clase ArchivoPartido para guardar en el archivo plano
     private void Cargar() throws IOException {
         arc = new ArchivoPartidos(this);
         String esc = equipo1 + "\n" + equipo2 + "\n" + fecha;

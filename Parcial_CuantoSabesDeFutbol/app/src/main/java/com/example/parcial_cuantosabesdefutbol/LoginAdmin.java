@@ -47,6 +47,7 @@ public class LoginAdmin extends AppCompatActivity {
         });
     }
 
+    //crea un administrador escribiendo en archivo plano
     private void noExiste() {
         try {
             Archivo = new ArchivoLogin(this);
@@ -74,6 +75,7 @@ public class LoginAdmin extends AppCompatActivity {
             }
     }
 
+    //si el administrador existe, ingresa al activity administrador
     private void existe() {
         try {
             Archivo = new ArchivoLogin(this);
